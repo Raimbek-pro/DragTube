@@ -5,19 +5,18 @@
 <h1 align="center">DragTube</h1>
 
 <p align="center">
-  Save YouTube videos in Safari by dragging them — then pull up your list with a single key.
+  Save YouTube videos in Safari with one click — then pull up your list with a single key.
 </p>
 
 <p align="center">
-  <img src="docs/screenshots/drop-zone.webp" width="49%" alt="Dragging a video onto the drop zone">
-  <img src="docs/screenshots/saved-sheet.webp" width="49%" alt="The saved-videos sheet">
+  <img src="docs/screenshots/saved-sheet.webp" width="80%" alt="The saved-videos sheet">
 </p>
 
 ## What it does
 
-DragTube is a Safari extension for macOS that turns "I'll watch this later" into one gesture.
+DragTube is a Safari extension for macOS that turns "I'll watch this later" into one click.
 
-- **Drag to save.** Start dragging any video on YouTube — a thumbnail, a title, a link — and a drop zone slides in on the right. Let go on it and the video is saved. No need to open the video or select anything.
+- **Hover and save.** Point at any video on YouTube and a **Save** button appears on its thumbnail, just like YouTube's own hover buttons. Click it and the video is saved — no need to open it.
 - **Press 5 to see them.** A native SwiftUI sheet with Liquid Glass rises from the bottom edge of the screen with all your saved videos.
 - **Click to watch.** The video opens right in the tab you're on.
 
@@ -25,8 +24,7 @@ DragTube is a Safari extension for macOS that turns "I'll watch this later" into
 
 | | |
 |---|---|
-| **Save a video** | Drag any video on YouTube onto the drop zone. |
-| **Save from elsewhere** | Drag a YouTube link from another tab, the address bar or another app onto a YouTube page. |
+| **Save a video** | Hover any video on YouTube and click **Save** on its thumbnail. |
 | **Open your saved videos** | Press **4**, **5** or **6** (number row or keypad), or click the DragTube toolbar button. |
 | **Watch** | Click a video — it opens in the current tab. |
 | **Remove** | Hover a video and click ✕, or use **Clear All**. |
@@ -48,7 +46,7 @@ flowchart LR
     app -.-> store
 ```
 
-1. **`script.js`** runs on youtube.com. It shows the drop zone while you drag, works out the video ID and title, and listens for 4 / 5 / 6.
+1. **`script.js`** runs on youtube.com. It shows the Save button on the video you're hovering (including YouTube's hover preview), works out the video ID and title, and listens for 4 / 5 / 6.
 2. **The extension** (`SafariExtensionHandler`) saves videos to storage shared with the app (an App Group) and opens the app with `dragtube://saved`, without bringing it to the front.
 3. **The app** shows `SavedSheetView` in a borderless, non-activating panel (`SheetPanel`) docked to the bottom of the screen.
 4. **Clicking a video**: only the extension can control Safari tabs, so the app leaves the video ID in the App Group and sends a notification. The extension picks it up and navigates the current tab. If the extension doesn't answer within a second, the app opens the video in a new Safari tab instead.
@@ -85,7 +83,7 @@ DragTube/                     The app: setup window + the saved-videos sheet
   SheetPanel.swift            Floating panel docked to the bottom edge; open/close logic
   SavedSheetView.swift        The sheet's SwiftUI interface (Liquid Glass, video grid)
 DragTube Extension/           The Safari extension
-  script.js, style.css        Runs on YouTube: drop zone, toast, 4/5/6 keys
+  script.js, style.css        Runs on YouTube: Save button, toast, 4/5/6 keys
   SafariExtensionHandler.swift  Messages from the page and the toolbar button
   AppBridge.swift             Opens the sheet; opens clicked videos in the current tab
 Shared/                       Compiled into both
