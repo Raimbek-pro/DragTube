@@ -1,0 +1,47 @@
+<!--
+  Info.plist settings for "DragTube Extension".
+  In Xcode: right-click the extension's Info.plist → Open As → Source Code,
+  then replace the whole <key>NSExtension</key><dict>…</dict> block with the one below.
+-->
+<key>NSExtension</key>
+<dict>
+    <key>NSExtensionPointIdentifier</key>
+    <string>com.apple.Safari.extension</string>
+    <key>NSExtensionPrincipalClass</key>
+    <string>$(PRODUCT_MODULE_NAME).SafariExtensionHandler</string>
+    <key>SFSafariContentScript</key>
+    <array>
+        <dict>
+            <key>Script</key>
+            <string>script.js</string>
+        </dict>
+    </array>
+    <key>SFSafariStyleSheet</key>
+    <array>
+        <dict>
+            <key>Style Sheet</key>
+            <string>style.css</string>
+        </dict>
+    </array>
+    <key>SFSafariToolbarItem</key>
+    <dict>
+        <key>Action</key>
+        <string>Popover</string>
+        <key>Identifier</key>
+        <string>Button</string>
+        <key>Image</key>
+        <string>ToolbarItemIcon.pdf</string>
+        <key>Label</key>
+        <string>DragTube</string>
+    </dict>
+    <key>SFSafariWebsiteAccess</key>
+    <dict>
+        <key>Allowed Domains</key>
+        <array>
+            <string>youtube.com</string>
+            <string>*.youtube.com</string>
+        </array>
+        <key>Level</key>
+        <string>Some</string>
+    </dict>
+</dict>

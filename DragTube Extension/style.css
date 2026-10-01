@@ -1,0 +1,106 @@
+/* DragTube — drop zone styles (YouTube only). All classes start with dragtube- */
+
+.dragtube-zone,
+.dragtube-toast {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
+  color: #f2f2f2;
+  box-sizing: border-box;
+}
+
+/* ---------- drop zone (dark gray, no blur — cheap to render) ---------- */
+.dragtube-zone {
+  position: fixed;
+  right: 28px;
+  top: 50%;
+  width: 200px;
+  height: 200px;
+  margin-top: -100px;
+  z-index: 2147483646;
+  border-radius: 24px;
+  background: #18181a !important;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  transform: translateX(24px);
+  transition: opacity 0.15s ease-out, transform 0.15s ease-out,
+              background-color 0.12s, border-color 0.12s;
+  pointer-events: none;
+  will-change: opacity, transform;
+}
+
+.dragtube-zone.dragtube-show {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+/* hovering with a video over the zone */
+.dragtube-zone.dragtube-show.dragtube-hover {
+  background: #303034 !important;
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+.dragtube-zone.dragtube-done  { border-color: rgba(255, 255, 255, 0.45); }
+.dragtube-zone.dragtube-error { color: #9a9a9a; }
+
+.dragtube-zone-inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  pointer-events: none;
+}
+
+.dragtube-zone-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: 300;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px dashed rgba(255, 255, 255, 0.3);
+  transition: background-color 0.12s, border-color 0.12s;
+}
+.dragtube-zone.dragtube-hover .dragtube-zone-icon {
+  background: rgba(255, 255, 255, 0.16);
+  border-style: solid;
+}
+.dragtube-zone.dragtube-done .dragtube-zone-icon {
+  background: #f2f2f2;
+  color: #18181a;
+  border-color: transparent;
+}
+
+.dragtube-zone-label { font-size: 15px; font-weight: 600; }
+.dragtube-zone-hint  { font-size: 12px; color: #8e8e93; }
+
+/* ---------- toast ---------- */
+.dragtube-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 32px;
+  z-index: 2147483647;
+  max-width: calc(100vw - 32px);
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 500;
+  background: #18181a !important;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  transform: translate(-50%, 8px);
+  transition: opacity 0.15s ease-out, transform 0.15s ease-out;
+  pointer-events: none;
+}
+.dragtube-toast.dragtube-show { opacity: 1; transform: translate(-50%, 0); }
+
+@media (prefers-reduced-motion: reduce) {
+  .dragtube-zone, .dragtube-toast { transition-duration: 0.01s; }
+}
